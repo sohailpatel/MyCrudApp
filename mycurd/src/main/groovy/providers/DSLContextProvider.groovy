@@ -28,7 +28,6 @@ class DSLContextProvider implements Provider<DSLContext> {
         String userName = properties.getProperty("MYSQL_USER_LOGIN")
         String password = properties.getProperty("MYSQL_USER_PASSWORD")
         String url = properties.getProperty("MYSQL_DB_URL")
-        println userName+password+url+properties
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url, userName, password)
         return DSL.using(connection, SQLDialect.MYSQL)
