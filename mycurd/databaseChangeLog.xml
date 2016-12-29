@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="webonise (generated)" id="1482593978136-1">
+        <createTable tableName="studentinfo">
+            <column name="_id" type="INT"/>
+            <column name="name" type="VARCHAR(20)"/>
+            <column name="age" type="INT"/>
+            <column name="class" type="VARCHAR(10)"/>
+            <column name="rollno" type="INT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

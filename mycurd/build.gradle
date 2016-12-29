@@ -1,0 +1,96 @@
+apply plugin: 'groovy'
+apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'org.liquibase.gradle'
+apply plugin: 'nu.studer.jooq'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+
+    }
+
+    dependencies {
+        classpath "org.liquibase:liquibase-gradle-plugin:1.2.1"
+        classpath 'mysql:mysql-connector-java:5.1.6'
+        classpath 'nu.studer:gradle-jooq-plugin:2.0.0'
+        classpath('org.akhikhl.gretty:gretty:+')
+    }
+}
+
+gretty {
+    servletContainer = 'tomcat8'
+    contextPath = ""
+    port= 8082
+}
+
+configurations {
+    all*.resolutionStrategy {
+        force "org.codehaus.groovy:groovy-all:2.4.7"
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    jooqRuntime 'mysql:mysql-connector-java:5.1.6'
+    compile 'mysql:mysql-connector-java:5.1.6'
+    compile 'org.jooq:jooq'
+    compile 'restling:restling-core:0.0.7'
+    compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
+
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile project.property('CHANGE_LOG_FILE_PATH')
+            url project.property('MYSQL_DB_URL') + '?createDatabaseIfNotExist=true'
+            username project.property('MYSQL_USER_LOGIN')
+            password project.property('MYSQL_USER_PASSWORD')
+        }
+    }
+}
+
+jooq {
+    users(sourceSets.main) {
+        jdbc {
+            driver = project.property('MYSQL_JDBC_DRIVER')
+            url = project.property('MYSQL_DB_URL')
+            user = project.property('MYSQL_USER_LOGIN')
+            password = project.property('MYSQL_USER_PASSWORD')
+            schema = project.property('JOOQ_DB_SCHEMA')
+        }
+        generator {
+            name = 'org.jooq.util.DefaultGenerator'
+
+            strategy {
+                name = 'org.jooq.util.DefaultGeneratorStrategy'
+            }
+            database {
+                name = project.property('JOOQ_DB_NAME')
+                inputSchema = project.property('JOOQ_DB_SCHEMA')
+            }
+            generate {
+                relations = true
+                immutablePojos = true
+            }
+            target {
+                packageName = project.property('JOOQ_TARGET_PACKAGE_NAME')
+                directory = project.property('JOOQ_TARGET_DIRCTORY')
+            }
+        }
+    }
+}
