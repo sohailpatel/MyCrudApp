@@ -12,11 +12,13 @@ import org.jooq.SelectJoinStep
 import org.jooq.TableLike
 import org.jooq.impl.DSL
 import pojos.StudentPojo
+import groovy.util.logging.Slf4j
 
 /**
  * Created by webonise on 25-12-2016.
  */
 
+@Slf4j
 @CompileStatic
 class UserDao {
     private static final String ID_PARAMETER = "ID_PARAMETER"
@@ -28,7 +30,7 @@ class UserDao {
     }
 
     List<StudentPojo> allStudents() {
-        //println(dslContext.select().from(Tables.STUDENTINFO).fetch().into(Tables.STUDENTINFO))
+        //log.info "Student Table - "dslContext.select().from(Tables.STUDENTINFO).fetch().into(Tables.STUDENTINFO)
         List<StudentinfoRecord> studentinfoRecordList = dslContext.select().from(Tables.STUDENTINFO).fetch().into(Tables.STUDENTINFO)
         List<StudentPojo> studentPojoList=new ArrayList<StudentPojo>();
         for (int rowCounter = 0; rowCounter < studentinfoRecordList.size(); rowCounter++) {
@@ -41,7 +43,7 @@ class UserDao {
         return studentPojoList
     }
     int saveStudent(StudentPojo student) {
-        println "-----"+student
+        log.info "Student Pojo - "+student
         return dslContext.execute("insert into studentinfo(name,age,class,rollno) values('$student.name',$student.age,'$student.className',$student.rollNo)")
 
         /*StudentinfoRecord studentRecord = dslContext.newRecord(Tables.STUDENTINFO)
@@ -49,13 +51,13 @@ class UserDao {
         studentRecord.setAge(student.getAge())
         studentRecord.setClass_(student.getClassName())
         studentRecord.setRollno(student.getRollNo())
-        println StudentinfoRecord
         studentRecord.into(Tables.STUDENTINFO)
         return studentRecord.into(Tables.STUDENTINFO)*/
     }
 
     int updateStudent(int studentId, StudentPojo student) {
-        println studentId+" "+student
+        log.info "Student ID - "+studentId
+        log.info "Studeint Pojo - "+" "+student
         return dslContext.execute("update studentinfo set name='$student.name',age=$student.age,class='$student.className',rollno=$student.rollNo where _id=$studentId");
 
         /*Param<Integer> idParam = DSL.param(ID_PARAMETER, studentId)
@@ -65,7 +67,7 @@ class UserDao {
     }
 
     int deleteStudent(int studentId) {
-        println studentId
+        log.info "Student ID - "+studentId
         return dslContext.execute("delete from studentinfo where _id=$studentId");
 
         /*Param<Integer> idParam = DSL.param(ID_PARAMETER, studentId)

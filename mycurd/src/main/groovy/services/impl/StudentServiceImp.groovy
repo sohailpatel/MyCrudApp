@@ -20,7 +20,6 @@ class StudentServiceImp implements StudentService{
 
     @Override
     int saveStudent(StudentPojo student) {
-        println("insert")
         //context.insertInto(Tables.STUDENTINFO).set(Tables.STUDENTINFO.NAME,student.name).set(Tables.STUDENTINFO.AGE,student.age).set(Tables.STUDENTINFO.CLASS,student.className).set(Tables.STUDENTINFO.ROLLNO,student.rollNo)
         //return context.execute("insert into studentinfo(name,age,class,rollno) values('$student.name',$student.age,'$student.className',$student.rollNo)")
         return userDao.saveStudent(student)
@@ -28,21 +27,17 @@ class StudentServiceImp implements StudentService{
 
     @Override
     List<StudentPojo> allStudents() {
-        println("All Student")
-        //println context.execute("select * from studentinfo")
         return userDao.allStudents()
     }
 
     @Override
     int updateStudent(int studentId, StudentPojo student) {
-        println("update")
-       // return context.execute("update studentinfo set name='updated' where _id=$studentId")
+        // return context.execute("update studentinfo set name='updated' where _id=$studentId")
         return userDao.updateStudent(studentId,student)
     }
 
     @Override
     int deleteStudent(int studentId) {
-        println("Delete")
         //return context.execute("delete from studentinfo where _id=$studentId")
         return userDao.deleteStudent(studentId)
     }

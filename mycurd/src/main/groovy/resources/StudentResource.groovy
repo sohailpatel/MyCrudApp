@@ -17,8 +17,7 @@ import services.interfaces.StudentService
 
 class StudentResource extends ServerResource{
 
-    private static final String USER_ID = "userid"
-    private StudentService studentService
+   private StudentService studentService
 
     @Inject
     StudentResource(StudentService studentService) {
@@ -38,15 +37,11 @@ class StudentResource extends ServerResource{
     @Put
     int updateStudent(StudentPojo student) {
         int studentId = getQueryValue("studentId") as int
-        println studentId
-        println student
         return studentService.updateStudent(studentId, student)
     }
 
     @Delete
     int deleteStudent() {
-        println("delete resource")
-        //int id = Integer.parseInt(getQuery().getValues(USER_ID))
         int studentId = getQueryValue("studentId") as int
         return studentService.deleteStudent(studentId)
     }

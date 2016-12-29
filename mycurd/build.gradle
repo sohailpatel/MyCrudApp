@@ -47,8 +47,9 @@ dependencies {
     compile 'org.jooq:jooq'
     compile 'restling:restling-core:0.0.7'
     compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
-
-
+    compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'junit:junit:4.12'
 }
