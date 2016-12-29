@@ -34,10 +34,10 @@ class UserDao {
         List<StudentinfoRecord> studentinfoRecordList = dslContext.select().from(Tables.STUDENTINFO).fetch().into(Tables.STUDENTINFO)
         List<StudentPojo> studentPojoList=new ArrayList<StudentPojo>();
         for (int rowCounter = 0; rowCounter < studentinfoRecordList.size(); rowCounter++) {
-           StudentPojo studentPojo = new StudentPojo(String.valueOf(studentinfoRecordList.get(rowCounter).get(1)),
-                Integer.parseInt(String.valueOf(studentinfoRecordList.get(rowCounter).get(2))),
-                    String.valueOf(studentinfoRecordList.get(rowCounter).get(3)),
-                        Integer.parseInt(String.valueOf(studentinfoRecordList.get(rowCounter).get(4))))
+           StudentPojo studentPojo = new StudentPojo(name: String.valueOf(studentinfoRecordList.get(rowCounter).get(1)),
+                age: Integer.parseInt(String.valueOf(studentinfoRecordList.get(rowCounter).get(2))),
+                    className: String.valueOf(studentinfoRecordList.get(rowCounter).get(3)),
+                        rollNo: Integer.parseInt(String.valueOf(studentinfoRecordList.get(rowCounter).get(4))))
             studentPojoList.add(studentPojo);
         }
         return studentPojoList
