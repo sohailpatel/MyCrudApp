@@ -9,6 +9,7 @@ import jdk.nashorn.internal.ir.annotations.Immutable
  */
 @Immutable
 class StudentPojo {
+    int _id;
     String name;
     int age;
     String className;
