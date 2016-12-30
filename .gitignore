@@ -1,6 +1,7 @@
 .gradle
 build/
 .idea/
+src/main/java/org/sohail/mycrud/sql/commons/
 # Ignore Gradle GUI config
 gradle-app.setting
 
