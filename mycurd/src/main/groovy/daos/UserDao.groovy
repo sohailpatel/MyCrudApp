@@ -73,8 +73,6 @@ class UserDao {
 
     int deleteStudent(int studentId) {
         log.info "Student ID - "+studentId
-        return dslContext.execute("delete from studentinfo where _id=$studentId");
-
         Param<Integer> idParam = DSL.param(ID_PARAMETER, studentId)
         StudentinfoRecord studentRecord = dslContext.fetchOne(Tables.STUDENTINFO, Tables.STUDENTINFO._ID.equal(idParam))
         return studentRecord.delete()

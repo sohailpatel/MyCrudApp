@@ -33,7 +33,7 @@ class ApplicationTest extends Specification {
        StudentService studentService=new StudentServiceImp(userDao);
         when:
         StudentPojo studentPojo=new StudentPojo()
-        studentPojo.set_id(1)
+        studentPojo.set_id(100)
         studentPojo.setName('test')
         studentPojo.setAge(12)
         studentPojo.setClassName('testclass')
@@ -48,10 +48,13 @@ class ApplicationTest extends Specification {
         UserDao userDao=new UserDao(dslContext)
         StudentService studentService=new StudentServiceImp(userDao);
         when:
-        StudentPojo studentPojo=new StudentPojo(1,'test',12,'testclass',10)
-        int saveStudentOutput=studentService.saveStudent(studentPojo)
-        studentPojo=new StudentPojo(1,'testchange',22,'test',9)
-        int updateStudent=studentService.updateStudent(1,studentPojo)
+        StudentPojo studentPojo=new StudentPojo()
+        studentPojo.set_id(100)
+        studentPojo.setName('infotest')
+        studentPojo.setAge(14)
+        studentPojo.setClassName('class')
+        studentPojo.setRollNo(10)
+        int updateStudent=studentService.updateStudent(100,studentPojo)
         then:
         assert updateStudent == 1
     }
@@ -61,9 +64,7 @@ class ApplicationTest extends Specification {
         UserDao userDao=new UserDao(dslContext)
         StudentService studentService=new StudentServiceImp(userDao);
         when:
-        StudentPojo studentPojo=new StudentPojo(1,'test',12,'testclass',10)
-        int saveStudentOutput=studentService.saveStudent(studentPojo)
-        int deleteStudent=studentService.deleteStudent(1)
+        int deleteStudent=studentService.deleteStudent(100)
         then:
         assert deleteStudent == 1
     }
