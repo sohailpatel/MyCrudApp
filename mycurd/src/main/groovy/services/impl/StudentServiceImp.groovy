@@ -1,7 +1,6 @@
 package services.impl
 
 import com.google.inject.Inject
-import com.webonise.mycurd.tables.records.StudentinfoRecord
 import daos.UserDao
 import services.interfaces.StudentService
 import pojos.StudentPojo

@@ -1,9 +1,5 @@
 package services.interfaces
 
-import com.webonise.mycurd.tables.records.StudentinfoRecord
-import org.jooq.DSLContext
-import org.jooq.Record
-import org.jooq.SelectJoinStep
 import pojos.StudentPojo
 
 /**
